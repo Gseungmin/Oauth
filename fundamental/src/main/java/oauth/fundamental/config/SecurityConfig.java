@@ -2,8 +2,10 @@ package oauth.fundamental.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+@EnableWebSecurity
 public class SecurityConfig {
 
     //SecurityFilterChain Bean 생성
