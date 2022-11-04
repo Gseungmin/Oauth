@@ -1,4 +1,4 @@
-sever:
+server:
   port: 8081
 
 spring:
@@ -17,7 +17,7 @@ spring:
         provider:
           keycloak:
             authorizationUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/auth
-            jwkSetUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
+            jwkSetUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/certs
             tokenUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/token
             issuerUri: http://localhost:8080/realms/oauth2
             userInfoUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
