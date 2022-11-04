@@ -1,0 +1,24 @@
+sever:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            clientId: oauth2-client-app
+            clientSecret: 2r8Kx3YARvF6Bln43JI9nN0yrfbBzwpB
+            clientName: oauth2-client-app
+            redirectUri: http://localhost:8081/login/oauth2/code/keycloak
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: client_secret_basic
+            scope: openid,profile,email
+        provider:
+          keycloak:
+            authorizationUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/auth
+            jwkSetUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
+            tokenUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/token
+            issuerUri: http://localhost:8080/realms/oauth2
+            userInfoUri: http://localhost:8080/realms/oauth2/protocol/openid-connect/userinfo
+            userNameAttribute: preferred_username
