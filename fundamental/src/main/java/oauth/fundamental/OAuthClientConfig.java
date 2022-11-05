@@ -10,8 +10,9 @@ public class OAuthClientConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated();
-        http.oauth2Login();
+        http.authorizeRequests(authRequest ->
+                authRequest.antMatchers("/loginPage").permitAll().anyRequest().authenticated());
+        http.oauth2Login(oauth2 -> oauth2.loginPage("/loginPage")); //로그인 페이지 설정
         return http.build();
     }
 }
