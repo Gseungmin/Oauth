@@ -10,7 +10,8 @@ public class OAuthClientConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(request -> request.anyRequest().authenticated());
+        http.authorizeRequests(request -> request.antMatchers("/login").permitAll()
+                .anyRequest().authenticated());
         http.oauth2Login(oauth2 -> oauth2.loginPage("/login")
                 .authorizationEndpoint(authorizationEndpointConfig ->
                         authorizationEndpointConfig.baseUri("/oauth2/v1/authorization")));
