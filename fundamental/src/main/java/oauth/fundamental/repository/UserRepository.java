@@ -13,7 +13,7 @@ public class UserRepository {
 
     //회원 검색
     public User findByUsername(String username) {
-        if (users.containsKey("username")) {
+        if (users.containsKey(username)) {
             return (User) users.get(username);
         }
         return null;

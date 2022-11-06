@@ -10,10 +10,12 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
 
 /**
  * OidcUserRequest를 받아 OidcUser를 반환
  * */
+@Service
 public class CustomOidcUserService
         extends AbstractOAuth2UserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
 
