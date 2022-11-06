@@ -14,7 +14,9 @@ public class OAuthClientConfig {
                 .anyRequest().authenticated());
         http.oauth2Login(oauth2 -> oauth2.loginPage("/login")
                 .authorizationEndpoint(authorizationEndpointConfig ->
-                        authorizationEndpointConfig.baseUri("/oauth2/v1/authorization")));
+                        authorizationEndpointConfig.baseUri("/oauth2/v1/authorization"))
+                .redirectionEndpoint(redirectionEndpointConfig ->
+                        redirectionEndpointConfig.baseUri("/login/v1/oauth2/code/*")));
         return http.build();
     }
 }
