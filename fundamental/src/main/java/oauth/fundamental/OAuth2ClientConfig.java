@@ -15,8 +15,8 @@ public class OAuth2ClientConfig {
      * */
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
-                .antMatchers("/static/js/**");
+        return (web) -> web.ignoring().
+                antMatchers("/static/js/**", "/static/images/**", "/static/css/**","/static/scss/**");
     }
 
     @Bean
