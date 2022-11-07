@@ -1,8 +1,13 @@
 package oauth.fundamental.service;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import oauth.fundamental.converters.ProviderUserConverter;
+import oauth.fundamental.converters.ProviderUserRequest;
 import oauth.fundamental.model.*;
+import oauth.fundamental.model.social.GoogleUser;
+import oauth.fundamental.model.social.KeycloakUser;
+import oauth.fundamental.model.social.NaverUser;
+import oauth.fundamental.model.users.User;
 import oauth.fundamental.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
@@ -20,20 +25,14 @@ public abstract class AbstractOAuth2UserService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ProviderUserConverter<ProviderUserRequest, ProviderUser> providerUserConverter;
+
     /**
      * 먼저 네이버인지 구글인지 즉 서비스 구분이 필요
      */
-    public ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
-        String registrationId = clientRegistration.getRegistrationId();
-
-        if (registrationId.equals("keycloak")) {
-            return new KeycloakUser(oAuth2User, clientRegistration);
-        } else if (registrationId.equals("google")) {
-            return new GoogleUser(oAuth2User, clientRegistration);
-        } else if (registrationId.equals("naver")) {
-            return new NaverUser(oAuth2User, clientRegistration);
-        }
-        return null;
+    public ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
+        return providerUserConverter.converter(providerUserRequest);
     }
 
     /**

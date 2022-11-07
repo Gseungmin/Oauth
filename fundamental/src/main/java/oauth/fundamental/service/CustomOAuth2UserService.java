@@ -1,5 +1,6 @@
 package oauth.fundamental.service;
 
+import oauth.fundamental.converters.ProviderUserRequest;
 import oauth.fundamental.model.ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -30,12 +31,14 @@ public class CustomOAuth2UserService
          */
         OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 
+        ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oAuth2User);
+
         /**
          * 해당 정보가 구글인지 네이버인지 현재 상태를 모름
          * 최종적으로 반환하는 타입을 정해야 하므로 위로 보냄
          * 따라서 추상화된 User 객체로 반환받음
          * */
-        ProviderUser providerUser = super.providerUser(clientRegistration, oAuth2User);
+        ProviderUser providerUser = providerUser(providerUserRequest);
 
         //회원가입
         super.register(providerUser, userRequest);

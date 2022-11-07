@@ -1,6 +1,6 @@
 package oauth.fundamental.repository;
 
-import oauth.fundamental.model.User;
+import oauth.fundamental.model.users.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

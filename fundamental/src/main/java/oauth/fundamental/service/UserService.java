@@ -2,7 +2,7 @@ package oauth.fundamental.service;
 
 import lombok.RequiredArgsConstructor;
 import oauth.fundamental.model.ProviderUser;
-import oauth.fundamental.model.User;
+import oauth.fundamental.model.users.User;
 import oauth.fundamental.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
