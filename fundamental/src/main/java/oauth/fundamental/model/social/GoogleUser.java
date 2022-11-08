@@ -24,6 +24,17 @@ public class GoogleUser extends OAuth2ProviderUser {
 
     @Override
     public String getUsername() {
-        return (String) getAttributes().get("sub");
+        return (String) getAttributes().get("name");
+    }
+
+    //구글은 사진 가지고 오는 것이 없음 따라서 null 반환
+    @Override
+    public String getPicture() {
+        return null;
+    }
+
+    @Override
+    public OAuth2User getOAuth2User() {
+        return null;
     }
 }

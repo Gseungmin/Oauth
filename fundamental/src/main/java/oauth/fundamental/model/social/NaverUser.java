@@ -28,6 +28,16 @@ public class NaverUser extends OAuth2ProviderUser {
     //email 아니어도 됨
     @Override
     public String getUsername() {
-        return (String) getAttributes().get("email");
+        return (String) getAttributes().get("name");
+    }
+
+    @Override
+    public String getPicture() {
+        return (String) getAttributes().get("profile_image");
+    }
+
+    @Override
+    public OAuth2User getOAuth2User() {
+        return null;
     }
 }

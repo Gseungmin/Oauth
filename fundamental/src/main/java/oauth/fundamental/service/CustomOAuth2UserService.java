@@ -1,6 +1,7 @@
 package oauth.fundamental.service;
 
-import oauth.fundamental.converters.ProviderUserRequest;
+import oauth.fundamental.common.converters.ProviderUserRequest;
+import oauth.fundamental.model.PrincipalUser;
 import oauth.fundamental.model.ProviderUser;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -43,6 +44,6 @@ public class CustomOAuth2UserService
         //회원가입
         super.register(providerUser, userRequest);
 
-        return oAuth2User;
+        return new PrincipalUser(providerUser);
     }
 }

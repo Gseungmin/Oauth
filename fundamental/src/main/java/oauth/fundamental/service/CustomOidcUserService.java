@@ -1,16 +1,14 @@
 package oauth.fundamental.service;
 
-import oauth.fundamental.converters.ProviderUserRequest;
+import oauth.fundamental.common.converters.ProviderUserRequest;
+import oauth.fundamental.model.PrincipalUser;
 import oauth.fundamental.model.ProviderUser;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +21,19 @@ public class CustomOidcUserService
 
     @Override
     public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        ClientRegistration clientRegistration = userRequest.getClientRegistration();
+
+        /**
+         * ocid는 기본적으로 sub으로 접근해야 하므로 처리 로직
+         * */
+        ClientRegistration clientRegistration = ClientRegistration
+                .withClientRegistration(userRequest.getClientRegistration())
+                .userNameAttributeName("sub")
+                .build();
+
+        OidcUserRequest oidcUserRequest =
+                new OidcUserRequest(clientRegistration, userRequest.getAccessToken(),
+                        userRequest.getIdToken(), userRequest.getAdditionalParameters());
+
         OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService = new OidcUserService();
 
         /**
@@ -31,7 +41,7 @@ public class CustomOidcUserService
          * 가지고 온 정보를 OidcUser객체에 저장하고 반환
          * 따라서 해당 객체에는 사용자 정보와 관련된 정보가 다 갖춰져있음
          */
-        OidcUser oidcUser = oidcUserService.loadUser(userRequest);
+        OidcUser oidcUser = oidcUserService.loadUser(oidcUserRequest);
 
         ProviderUserRequest providerUserRequest = new ProviderUserRequest(clientRegistration, oidcUser);
 
@@ -45,6 +55,6 @@ public class CustomOidcUserService
         //회원가입
         super.register(providerUser, userRequest);
 
-        return oidcUser;
+        return new PrincipalUser(providerUser);
     }
 }
