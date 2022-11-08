@@ -2,11 +2,11 @@ package oauth.fundamental.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.stereotype.Service;
+import lombok.Setter;
 
 import java.util.Map;
 
-@Getter @Service
+@Getter @Setter
 @Builder
 public class Attributes {
 
