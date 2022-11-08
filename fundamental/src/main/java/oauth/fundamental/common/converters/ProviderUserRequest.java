@@ -1,4 +1,4 @@
-package oauth.fundamental.converters;
+package oauth.fundamental.common.converters;
 
 import oauth.fundamental.model.users.User;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;

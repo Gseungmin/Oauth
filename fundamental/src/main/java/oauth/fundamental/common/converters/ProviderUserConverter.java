@@ -1,4 +1,4 @@
-package oauth.fundamental.converters;
+package oauth.fundamental.common.converters;
 
 /**
  * T가 입력 타입

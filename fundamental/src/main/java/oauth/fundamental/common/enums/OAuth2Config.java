@@ -1,4 +1,4 @@
-package oauth.fundamental.enums;
+package oauth.fundamental.common.enums;
 
 public class OAuth2Config {
 

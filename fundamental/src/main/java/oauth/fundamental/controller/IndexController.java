@@ -1,5 +1,7 @@
 package oauth.fundamental.controller;
 
+import oauth.fundamental.common.util.OAuth2Utils;
+import oauth.fundamental.model.PrincipalUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -15,24 +17,24 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
+
     @GetMapping("/")
     public String index(Model model, Authentication authentication,
-                        @AuthenticationPrincipal OAuth2User oAuth2User) {
+                        @AuthenticationPrincipal PrincipalUser principalUser) {
 
-        OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
-        if (oAuth2AuthenticationToken != null) {
-            //네이버를 위한 고려 필요, 속성에서 차이가 있음 ex)response/id
-            Map<String, Object> attributes = oAuth2User.getAttributes();
-            String name = (String) attributes.get("name");
+        String view = "index";
 
-            //네이버일 경우
-            if (oAuth2AuthenticationToken.getAuthorizedClientRegistrationId().equals("naver")) {
-                Map<String, Object> response = (Map<String, Object>) attributes.get("response");
-                name = (String) response.get("name");
-            }
-            model.addAttribute("user", name);
+        /**
+         * 토큰의 타입에 따른 분류
+         * OAuth2AuthenticationToken타입이면 적어도 userDetatils 타입은 아님
+         * */
+        if (authentication != null) {
+
+            String userName = principalUser.providerUser().getUsername();
+
+            model.addAttribute("user", userName);
+            model.addAttribute("provider", principalUser.providerUser().getProvider());
         }
-        return "index";
+        return view;
     }
-
 }

@@ -1,4 +1,4 @@
-package oauth.fundamental.converters;
+package oauth.fundamental.common.converters;
 
 
 import oauth.fundamental.model.ProviderUser;
@@ -22,8 +22,11 @@ public class DelegatingProviderUserConverter implements ProviderUserConverter<Pr
     public DelegatingProviderUserConverter() {
         List<ProviderUserConverter<ProviderUserRequest, ProviderUser>> providerUserConverters =
                 Arrays.asList(
+                        new UserDetailsProviderUserConverter(),
                         new OAuth2GoogleProviderUserConverter(),
-                        new OAuth2NaverProviderUserConverter());
+                        new OAuth2NaverProviderUserConverter(),
+                        new OAuth2KakaoOidcProviderUserConverter(),
+                        new OAuth2KakaoProviderUserConverter());
         this.converters = Collections.unmodifiableList(new LinkedList<>(providerUserConverters));
     }
 

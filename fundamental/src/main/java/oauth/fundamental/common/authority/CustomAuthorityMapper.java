@@ -1,4 +1,4 @@
-package oauth.fundamental;
+package oauth.fundamental.common.authority;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

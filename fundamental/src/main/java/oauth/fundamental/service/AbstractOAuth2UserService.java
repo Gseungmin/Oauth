@@ -1,18 +1,13 @@
 package oauth.fundamental.service;
 
 import lombok.Getter;
-import oauth.fundamental.converters.ProviderUserConverter;
-import oauth.fundamental.converters.ProviderUserRequest;
+import oauth.fundamental.common.converters.ProviderUserConverter;
+import oauth.fundamental.common.converters.ProviderUserRequest;
 import oauth.fundamental.model.*;
-import oauth.fundamental.model.social.GoogleUser;
-import oauth.fundamental.model.social.KeycloakUser;
-import oauth.fundamental.model.social.NaverUser;
 import oauth.fundamental.model.users.User;
 import oauth.fundamental.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service

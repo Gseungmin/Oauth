@@ -1,9 +1,9 @@
-package oauth.fundamental.converters;
+package oauth.fundamental.common.converters;
 
-import oauth.fundamental.enums.OAuth2Config;
+import oauth.fundamental.common.enums.OAuth2Config;
 import oauth.fundamental.model.ProviderUser;
 import oauth.fundamental.model.social.GoogleUser;
-import oauth.fundamental.util.OAuth2Utils;
+import oauth.fundamental.common.util.OAuth2Utils;
 
 public class OAuth2GoogleProviderUserConverter implements ProviderUserConverter<ProviderUserRequest, ProviderUser> {
     @Override

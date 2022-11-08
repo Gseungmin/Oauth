@@ -1,6 +1,10 @@
-package oauth.fundamental.util;
+package oauth.fundamental.common.util;
 
+import oauth.fundamental.common.enums.OAuth2Config;
 import oauth.fundamental.model.Attributes;
+import oauth.fundamental.model.PrincipalUser;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Map;
